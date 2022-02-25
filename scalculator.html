@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .main-container {
+            flex-direction: column;
+            justify-content: flex-start;
+
+        }
+
+        .button-container {
+            display: flexbox;
+        }
+
+        .primary-button {
+            margin: 10px;
+            padding: 15px;
+        }
+
+        #equal {
+            margin: 10px;
+            padding: 15px;
+        }
+
+        #sec-button {
+            margin: 10px;
+            padding: 15px;
+        }
+
+        input {
+            width: 100px;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+
+</head>
+
+<body class="center">
+    <div class="main-container center">
+        <input type="text" for="input">
+        <div class="button-container">
+            <button class="primary-button numbers">
+                1
+            </button>
+            <button class="primary-button numbers">
+                2
+            </button>
+            <button class="primary-button numbers">
+                3
+            </button>
+            <button class="primary-button">
+                +
+            </button>
+        </div>
+        <div class="button-container">
+            <button class="primary-button numbers">
+                4
+            </button>
+            <button class="primary-button numbers">
+                5
+            </button>
+            <button class="primary-button numbers">
+                6
+            </button>
+            <button class="primary-button">
+                -
+            </button>
+        </div>
+        <div class="button-container">
+            <button class="primary-button numbers">
+                7
+            </button>
+            <button class="primary-button numbers">
+                8
+            </button>
+            <button class="primary-button numbers">
+                9
+            </button>
+            <button class="primary-button">
+                *
+            </button>
+        </div>
+        <div class="button-container">
+            <button class="primary-button numbers">
+                0
+            </button>
+            <button class="primary-button">
+                /
+            </button>
+            <button id="equal">
+                =
+            </button>
+            <button id="sec-button">C</button>
+            <!-- <button class="primary-button">
+                +
+            </button> -->
+            <!-- <button class="primary-button">
+                -
+            </button> -->
+        </div>
+        <div class="button-container">
+            <!-- <button class="primary-button">
+                *
+            </button> -->
+            <!-- <button class="primary-button">
+                /
+            </button>
+            <button  id="equal">
+                =
+            </button> -->
+        </div>
+        <!-- <button id="sec-button">Clear</button> -->
+    </div>
+
+    <script>
+
+        const compute = event => {
+            try {
+                const computedValue = eval(getContentFromInputBar())
+                setContentInputBar(computedValue)
+            }
+            catch {
+                setContentInputBar("Error")
+            }
+        }
+
+        const getContentFromInputBar = () => {
+            const inputBar = document.querySelector("body > div > input[type=text]")
+            return inputBar.value;
+        }
+
+        const setContentInputBar = (input) => {
+            const inputBar = document.querySelector("body > div > input[type=text]")
+            inputBar.value = input
+        }
+        const numberHandler = event => {
+
+            setContentInputBar(getContentFromInputBar() + event.target.innerText)
+
+        }
+
+        const numbers = document.querySelectorAll(".primary-button")
+
+        numbers.forEach(ele => {
+            ele.addEventListener("click", numberHandler)
+        })
+
+
+        document.getElementById('equal').addEventListener('click', compute);
+
+        const clearInput = event => {
+            setContentInputBar("")
+        }
+
+        document.getElementById("sec-button").addEventListener('click', clearInput)
+
+    </script>
+
+</body>
+
+</html>
